@@ -2,9 +2,11 @@
 
 namespace App\Listeners;
 
+use App\Mail\NovoAcesso;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Auth\Events\Login;
+use Illuminate\Support\Facades\Mail;
 
 class LoginListener
 {
@@ -27,5 +29,8 @@ class LoginListener
     public function handle(Login $event)
     {
         info('Logou!');
+        //user, users[], email
+        Mail::to($event->user)
+            ->send(new NovoAcesso($event->user));
     }
 }
