@@ -25,6 +25,6 @@ class NovoAcesso extends Mailable
             'nome' => $this->user->name,
             'email' => $this->user->email,
             'datahora' => now()->setTimezone('America/Sao_Paulo')->format('d-m-y H:i:s'),
-        ]);
+        ])->attach(base_path() . '/arquivos/qualquer.pdf');
     }
 }
